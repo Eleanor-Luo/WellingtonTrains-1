@@ -153,12 +153,13 @@ public class WellingtonTrains{
     }
 
     public void listLinesOfStation(String stationName){
-        for (Map.Entry trainline : trainline.entrySet()){
-         if (trainline.equals(stationName)){
-            UI.println(trainline.getKey());
+        trainline.forEach((k, v) -> {
+            if (v.equals(stationName)){
+            UI.println(k);
             }
+        });
         }
-    }
+    
 
     public void listStationsOnLine(String lineName){
         //core
