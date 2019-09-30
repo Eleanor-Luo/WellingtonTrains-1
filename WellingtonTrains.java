@@ -105,7 +105,6 @@ public class WellingtonTrains{
             while (sc.hasNext()){
                 String name = sc.next();
                 stat.put(name, new Station(name, sc.nextInt(), sc.nextDouble()));
-                UI.println("stationName:" + stat.get(name).getName());
             }
         }
         catch (IOException e){
@@ -126,8 +125,8 @@ public class WellingtonTrains{
                 File[] fileArray = new File("data/").listFiles();
                 for(File f: fileArray) // loop thru all files
                 {
-
-                    if(f.getName().endsWith("stations.data")) // to deal with the .txt files.
+                    
+                    if(f.getName().endsWith("-stations.data")) // to deal with the .txt files.
                     {
 
                         try{
@@ -135,7 +134,9 @@ public class WellingtonTrains{
                             while(s.hasNext()) {
                                 String stationName = s.next();
                                 trainline.get(name).addStation(stat.get(stationName));
-                                stat.get(stationName).addTrainLine(trainline.get(name));
+                                Station stationzz = stat.get(stationName);
+                                TrainLine trainzz = trainline.get(name);
+                                stationzz.addTrainLine(trainzz);
                             }
                         }
                         catch(IOException e){}
@@ -152,7 +153,11 @@ public class WellingtonTrains{
     }
 
     public void listLinesOfStation(String stationName){
-        //core
+        for (Map.Entry trainline : trainline.entrySet()){
+         if (trainline.equals(stationName)){
+            UI.println(trainline.getKey());
+            }
+        }
     }
 
     public void listStationsOnLine(String lineName){
