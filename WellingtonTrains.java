@@ -125,7 +125,7 @@ public class WellingtonTrains{
                 File[] fileArray = new File("data/").listFiles();
                 for(File f: fileArray) // loop thru all files
                 {
-                    
+
                     if(f.getName().endsWith("-stations.data")) // to deal with the .txt files.
                     {
 
@@ -153,13 +153,25 @@ public class WellingtonTrains{
     }
 
     public void listLinesOfStation(String stationName){
-        trainline.forEach((k, v) -> {
-            if (v.equals(stationName)){
-            UI.println(k);
+        if(stat.containsKey(stationName)) {
+
+            //storing the selected station in a objecct
+            Station selectedStation = stat.get(stationName);
+
+            //getting all the lines that go through that station into a set
+            Set<TrainLine> linesThroughStation = selectedStation.getTrainLines();
+
+            //listing each lines name that is in that set of lines
+            for (TrainLine tL : linesThroughStation) {
+                    UI.println(tL.getName());
             }
-        });
+
+            UI.println(".....................");
         }
-    
+        else{
+            UI.println("Station doesnt exist make sure to use - for spaces");
+        }
+    }
 
     public void listStationsOnLine(String lineName){
         //core
